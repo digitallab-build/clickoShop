@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.6/theme.json",
+  "version": 2,
+  "settings": {
+    "appearanceTools": true,
+    "color": {
+      "defaultPalette": false,
+      "defaultGradients": false,
+      "palette": [
+        { "slug": "clicko-ink", "name": "Clicko Ink", "color": "#19191d" },
+        { "slug": "clicko-orange", "name": "Clicko Orange", "color": "#ff6b35" },
+        { "slug": "clicko-paper", "name": "Warm Paper", "color": "#f5f4f1" },
+        { "slug": "clicko-white", "name": "White", "color": "#ffffff" }
+      ]
+    },
+    "layout": { "contentSize": "850px", "wideSize": "1220px" },
+    "spacing": { "units": [ "px", "rem", "%", "vw" ] },
+    "typography": {
+      "fluid": true,
+      "fontSizes": [
+        { "slug": "small", "name": "Small", "size": "13px" },
+        { "slug": "medium", "name": "Medium", "size": "16px" },
+        { "slug": "large", "name": "Large", "size": "28px" },
+        { "slug": "x-large", "name": "Extra Large", "size": "40px" }
+      ]
+    }
+  },
+  "styles": {
+    "color": { "text": "#19191d", "background": "#ffffff" },
+    "typography": { "fontFamily": "Inter, 'Noto Sans Thai', 'Segoe UI', Arial, sans-serif", "lineHeight": "1.65" },
+    "elements": {
+      "link": { "color": { "text": "#19191d" } },
+      "button": { "color": { "text": "#ffffff", "background": "#ff6b35" } }
+    }
+  }
+}

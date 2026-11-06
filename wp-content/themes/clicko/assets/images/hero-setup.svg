@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Gaming PC setup</title>
+  <desc id="desc">A blue-lit desktop PC, gaming monitor, keyboard, mouse and headset.</desc>
+  <defs>
+    <linearGradient id="bg" x1="104" y1="96" x2="925" y2="581" gradientUnits="userSpaceOnUse"><stop stop-color="#EAF5FF"/><stop offset=".48" stop-color="#9DCBFF"/><stop offset="1" stop-color="#267CE9"/></linearGradient>
+    <linearGradient id="screen" x1="302" y1="167" x2="635" y2="403" gradientUnits="userSpaceOnUse"><stop stop-color="#071B3A"/><stop offset=".55" stop-color="#0B4D9C"/><stop offset="1" stop-color="#31B4FF"/></linearGradient>
+    <linearGradient id="case" x1="711" y1="77" x2="941" y2="525" gradientUnits="userSpaceOnUse"><stop stop-color="#17263B"/><stop offset=".5" stop-color="#060B14"/><stop offset="1" stop-color="#293B54"/></linearGradient>
+    <linearGradient id="edge" x1="70" y1="0" x2="550" y2="619" gradientUnits="userSpaceOnUse"><stop stop-color="#fff" stop-opacity=".96"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <radialGradient id="fan"><stop stop-color="#F8FFFF" stop-opacity=".95"/><stop offset=".12" stop-color="#26A9FF" stop-opacity=".7"/><stop offset=".46" stop-color="#0075FF" stop-opacity=".28"/><stop offset=".78" stop-color="#94DDFF" stop-opacity=".8"/><stop offset="1" stop-color="#123967" stop-opacity="0"/></radialGradient>
+    <filter id="shadow" x="0" y="0" width="1" height="1" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="15"/></filter>
+  </defs>
+  <path d="M0 0h1000v620H0z" fill="url(#bg)"/>
+  <path d="M-75 500 363-34h92L18 620h-94L-75 500ZM116 646 640-20h70L189 646h-73ZM615 640 1001 150v109L701 640h-86Z" fill="#fff" fill-opacity=".39"/>
+  <path d="M0 530h1000v90H0z" fill="#fff" fill-opacity=".15"/>
+  <ellipse cx="581" cy="544" rx="369" ry="40" fill="#1458A7" fill-opacity=".32" filter="url(#shadow)"/>
+  <!-- display -->
+  <g transform="rotate(-3 469 284)">
+    <path d="M252 107c0-11 9-20 20-20h396c11 0 20 9 20 20v286H252V107Z" fill="#111922"/>
+    <path d="M265 106h409v272H265z" fill="url(#screen)"/>
+    <path d="m265 338 113-129 88 85 68-77 140 161H265v-40Z" fill="#1CA4FB" fill-opacity=".8"/>
+    <path d="m265 355 105-79 84 44 87-86 133 144H265v-23Z" fill="#BCEBFF" fill-opacity=".69"/>
+    <circle cx="471" cy="116" r="2" fill="#596579"/>
+    <path d="M435 393h70l17 67H419l16-67Z" fill="#313B4B"/>
+    <path d="M386 462h168l24 15H363l23-15Z" fill="#202938"/>
+  </g>
+  <!-- desktop tower -->
+  <g>
+    <path d="M704 70c0-12 9-21 21-21h205c11 0 20 9 20 21v451H704V70Z" fill="url(#case)" stroke="#BDE0FF" stroke-opacity=".7" stroke-width="3"/>
+    <path d="M722 82h142v424H722z" fill="#111C2B" stroke="#5C82AA" stroke-opacity=".4"/>
+    <path d="M876 82h57v424h-57z" fill="#0A111B" stroke="#6D8EAF" stroke-opacity=".55"/>
+    <path d="M884 91h40v405h-40z" fill="#173351" fill-opacity=".4"/>
+    <circle cx="762" cy="154" r="36" fill="url(#fan)" stroke="#91DCFF" stroke-opacity=".8" stroke-width="2"/>
+    <circle cx="762" cy="253" r="36" fill="url(#fan)" stroke="#91DCFF" stroke-opacity=".8" stroke-width="2"/>
+    <circle cx="762" cy="352" r="36" fill="url(#fan)" stroke="#91DCFF" stroke-opacity=".8" stroke-width="2"/>
+    <circle cx="762" cy="451" r="36" fill="url(#fan)" stroke="#91DCFF" stroke-opacity=".8" stroke-width="2"/>
+    <path d="M749 154h26m-13-13v26m-13 86h26m-13-13v26m-13 86h26m-13-13v26m-13 86h26m-13-13v26" stroke="#E8FAFF" stroke-opacity=".85" stroke-width="2"/>
+    <path d="M888 102h33v6h-33zm0 13h33v6h-33zM888 128h33v6h-33z" fill="#54B8FF"/>
+  </g>
+  <!-- keyboard -->
+  <g transform="skewX(-17)">
+    <path d="M253 468h330l58 83H281l-28-83Z" fill="#17263A" stroke="#C5E4FF" stroke-width="3"/>
+    <path d="M274 481h291l40 57H298l-24-57Z" fill="#0C1625"/>
+    <g fill="#72C9FF" fill-opacity=".9"><path d="M292 487h33v12h-33zm41 0h33v12h-33zm41 0h33v12h-33zm41 0h33v12h-33zm41 0h33v12h-33zm41 0h33v12h-33z"/><path d="M301 506h34v11h-34zm42 0h34v11h-34zm42 0h34v11h-34zm42 0h34v11h-34zm42 0h34v11h-34z"/><path d="M312 524h42v9h-42zm50 0h42v9h-42zm50 0h42v9h-42zm50 0h66v9h-66z"/></g>
+  </g>
+  <!-- mouse -->
+  <path d="M642 493c0-27 19-46 43-46s43 19 43 46v32c0 25-18 42-43 42s-43-17-43-42v-32Z" fill="#142338" stroke="#CDEBFF" stroke-width="3"/>
+  <path d="M685 451v38m-42-8h84" stroke="#6BCBFF" stroke-width="3"/>
+  <!-- headset -->
+  <path d="M843 133v-15a81 81 0 0 1 162 0v16" stroke="#101722" stroke-width="17" stroke-linecap="round"/>
+  <rect x="830" y="126" width="33" height="83" rx="15" fill="#101722" stroke="#67C4FF" stroke-width="4"/>
+  <rect x="984" y="126" width="33" height="83" rx="15" fill="#101722" stroke="#67C4FF" stroke-width="4"/>
+  <path d="M991 195v27c0 17-14 31-31 31h-28" stroke="#141C29" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="927" cy="253" r="7" fill="#168DFF"/>
+</svg>
