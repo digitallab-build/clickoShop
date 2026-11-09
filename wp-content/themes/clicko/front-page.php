@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 get_header();
 $headline = get_theme_mod( 'clicko_home_headline', "รับซื้อและขาย\nคอมพิวเตอร์มือสอง\nและอุปกรณ์เกมมิง ครบ จบ ในที่เดียว" );
 $lines = preg_split( '/\r\n|\r|\n/', $headline );
@@ -51,5 +51,3 @@ $shop_url = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 
 	<?php while ( have_posts() ) : the_post(); if ( trim( wp_strip_all_tags( get_the_content() ) ) ) : ?><section class="clicko-shell clicko-home-content"><div class="entry-content"><?php the_content(); ?></div></section><?php endif; endwhile; ?>
 </main>
 <?php get_footer(); ?>
-
-\n

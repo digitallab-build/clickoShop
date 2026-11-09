@@ -261,5 +261,3 @@ function clicko_keep_catalog_only() {
 	}
 }
 add_action( 'template_redirect', 'clicko_keep_catalog_only', 1 );
-
-\n

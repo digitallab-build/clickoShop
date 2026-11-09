@@ -210,5 +210,3 @@ function clicko_render_featured_products() {
 		clicko_product_card( $product );
 	}
 }
-
-\n
