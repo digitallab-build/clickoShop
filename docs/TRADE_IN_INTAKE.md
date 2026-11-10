@@ -22,7 +22,7 @@
 3. ใน Supabase Dashboard → Edge Function Secrets ตั้งค่า:
    - `CLICKO_SUPABASE_SERVICE_ROLE_KEY` — secret/service-role key ของ Supabase; ใช้ฝั่ง function เท่านั้น ห้ามใส่ใน WordPress setting, browser หรือ Git
    - `CLICKO_TURNSTILE_SECRET_KEY` — Turnstile secret จาก Cloudflare
-   - `CLICKO_ALLOWED_ORIGINS` — origin ของเว็บจริง เช่น `https://tonzkittipon.github.io` (ไม่มี path `/clickoShop`); หลาย origin คั่นด้วย comma
+   - `CLICKO_ALLOWED_ORIGINS` — origin ของเว็บจริง เช่น `https://digitallab-build.github.io` (ไม่มี path `/clickoShop`); หลาย origin คั่นด้วย comma
 4. สร้าง Cloudflare Turnstile widget ให้โดเมนเว็บจริง แล้วใส่ public Site Key ใน `site/assets/js/site-config.js` ที่ตัวแปร `turnstileSiteKey`; secret key อยู่ใน Supabase Function Secrets เท่านั้น
 5. เพิ่มผู้ดูแล/พนักงานเข้า `clicko_admins` หรือ `clicko_staff_members` ตาม workflow เดิม และใช้หน้า `/trade-in-admin/` ทดสอบการเปิดรายการกับรูป
 6. เติมนโยบายความเป็นส่วนตัวและกำหนดระยะเวลาเก็บ/ลบคำขอกับรูปก่อนเปิดรับข้อมูลจริง

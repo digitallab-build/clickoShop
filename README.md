@@ -11,7 +11,7 @@
 5. ก่อนเปิดฟอร์มรับซื้อ/เทิร์น ให้ตั้ง Cloudflare Turnstile และ Supabase Edge Function ตามคู่มือ production
 6. push การเปลี่ยนแปลงใน `site/` หรือ workflow ไป branch `main`; GitHub Actions จะเผยแพร่เฉพาะ `site/`
 
-URL เริ่มต้นที่คาดไว้คือ `https://tonzkittipon.github.io/clickoShop/` หาก repository ตั้ง custom domain ให้ใช้โดเมนจริงแทนใน Supabase Auth และ CORS
+URL เริ่มต้นที่คาดไว้คือ `https://digitallab-build.github.io/clickoShop/` หาก repository ตั้ง custom domain ให้ใช้โดเมนจริงแทนใน Supabase Auth และ CORS
 
 ## ระบบและเอกสาร
 
