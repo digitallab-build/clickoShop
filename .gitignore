@@ -1,2 +1,9 @@
 # Local WordPress Playground SQLite database; do not commit preview data.
 /wp-content/database/
+
+# Local Supabase CLI dependencies and machine-specific CLI state.
+/node_modules/
+/.supabase-home/
+/supabase/.temp/
+/supabase/.env
+/supabase/.env.local
