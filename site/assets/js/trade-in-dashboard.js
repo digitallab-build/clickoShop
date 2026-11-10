@@ -38,8 +38,16 @@
 		var card = element('article', 'clicko-trade-request-card');
 		var heading = element('div', 'clicko-trade-request-card__heading');
 		heading.append(element('h2', '', record.reference));
-		heading.append(element('time', '', new Date(record.created_at).toLocaleString('th-TH')));
+		heading.append(element('time', '', 'ส่งเมื่อ ' + new Date(record.created_at).toLocaleString('th-TH', { timeZone: 'Asia/Bangkok' })));
 		card.append(heading);
+		var customerName = [record.customer_first_name, record.customer_last_name].filter(Boolean).join(' ');
+		card.append(element('p', 'clicko-trade-request-card__customer', 'ลูกค้า: ' + (customerName || 'ข้อมูลเดิมไม่มีชื่อ')));
+		if (record.customer_facebook_name) { card.append(element('p', 'clicko-trade-request-card__facebook-name', 'ชื่อ Facebook: ' + record.customer_facebook_name)); }
+		if (record.customer_phone) {
+			var phone = element('a', 'clicko-trade-request-card__phone', record.customer_phone);
+			phone.href = 'tel:' + record.customer_phone.replace(/[^+\d]/g, '');
+			card.append(phone);
+		}
 		card.append(element('p', 'clicko-trade-request-card__model', record.model));
 		if (record.warranty) { card.append(element('p', '', 'ประกัน: ' + record.warranty)); }
 		card.append(element('p', 'clicko-trade-request-card__condition', record.condition_notes));
@@ -99,7 +107,7 @@
 		list.replaceChildren();
 		announce('กำลังโหลดรายการ...');
 		var query = client.from('clicko_trade_inquiries')
-			.select('id,reference,model,warranty,condition_notes,photo_paths,status,created_at')
+			.select('id,reference,customer_first_name,customer_last_name,customer_facebook_name,customer_phone,model,warranty,condition_notes,photo_paths,status,created_at')
 			.order('created_at', { ascending: false })
 			.limit(200);
 		if (filter.value !== 'all') { query = query.eq('status', filter.value); }

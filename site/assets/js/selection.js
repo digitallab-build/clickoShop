@@ -250,31 +250,37 @@
 	}
 	form.addEventListener('submit', async function (event) {
 		event.preventDefault();
-		if (!config.submitUrl || !config.publishableKey || !config.turnstileSiteKey || !window.turnstile) {
+		if (!config.submitUrl || !config.publishableKey || !config.messengerUrl || !config.turnstileSiteKey || !window.turnstile) {
 			status.textContent = 'ระบบรับข้อมูลยังตั้งค่าไม่ครบ กรุณาติดต่อร้าน';
 			status.classList.add('is-error');
 			return;
 		}
 		var fields = new FormData(form);
-		var model = String(fields.get('model') || '').trim();
-		var condition = String(fields.get('condition') || '').trim();
-		var files = Array.from(form.querySelector('[name="photos"]').files || []);
-		if (!model || !condition) { return; }
-		if (files.length < 1 || files.length > 4 || files.some(function (file) { return ['image/jpeg', 'image/png', 'image/webp'].indexOf(file.type) === -1 || file.size > 5 * 1024 * 1024; })) {
-			status.textContent = 'แนบอย่างน้อย 1 รูป สูงสุด 4 รูป เฉพาะ JPG, PNG หรือ WEBP ขนาดไม่เกิน 5 MB ต่อรูป';
-			status.classList.add('is-error');
-			return;
-		}
 		submitButton.disabled = true;
 		status.classList.remove('is-error');
-		status.textContent = 'กำลังส่งข้อมูลและรูปอย่างปลอดภัย...';
+		status.textContent = 'กำลังบันทึกข้อมูลในระบบ...';
 		try {
-			var result = await fetch(config.submitUrl, { method: 'POST', headers: { apikey: config.publishableKey }, body: fields });
+			var result = await fetch(config.submitUrl, {
+				method: 'POST',
+				headers: { apikey: config.publishableKey, 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					company_website: fields.get('company_website'),
+					customer_first_name: fields.get('customer_first_name'),
+					customer_last_name: fields.get('customer_last_name'),
+					customer_facebook_name: fields.get('customer_facebook_name'),
+					customer_phone: fields.get('customer_phone'),
+					model: fields.get('model'),
+					warranty: fields.get('warranty'),
+					condition: fields.get('condition'),
+					captcha_token: window.turnstile.getResponse(widgetId)
+				})
+			});
 			var payload = await result.json();
 			if (!result.ok || !payload.ok) { throw new Error(payload.error || 'ส่งข้อมูลไม่สำเร็จ'); }
 			form.reset();
 			if (widgetId !== null) { window.turnstile.reset(widgetId); }
-			status.textContent = 'บันทึกข้อมูลแล้ว หมายเลขอ้างอิง ' + payload.reference;
+			status.textContent = 'บันทึกข้อมูลแล้ว หมายเลขอ้างอิง ' + payload.reference + ' กำลังเปิด Messenger ของ Kew...';
+			window.location.assign(config.messengerUrl);
 		} catch (error) {
 			status.textContent = error.message || 'ส่งข้อมูลไม่สำเร็จ กรุณาลองใหม่';
 			status.classList.add('is-error');

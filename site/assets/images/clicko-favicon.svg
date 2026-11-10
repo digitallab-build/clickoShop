@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Clicko">
+  <defs>
+    <linearGradient id="key" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3b3d42"/>
+      <stop offset="1" stop-color="#101114"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff405e"/>
+      <stop offset="1" stop-color="#c9002c"/>
+    </linearGradient>
+  </defs>
+  <rect x="3" y="3" width="58" height="58" rx="16" fill="#08090b"/>
+  <path d="M18 11h33a6 6 0 0 1 6 6v30a6 6 0 0 1-6 6H13a6 6 0 0 1-6-6V22z" fill="url(#edge)"/>
+  <path d="M17 8h33a6 6 0 0 1 6 6v32a6 6 0 0 1-6 6H14a6 6 0 0 1-6-6V20z" fill="url(#key)" stroke="#515258" stroke-width="1.5"/>
+  <path d="M39 19H27a3 3 0 0 0-3 3v17a3 3 0 0 0 3 3h12v-6H30V25h9z" fill="#fff"/>
+  <path d="M47 18v10" stroke="#ff294d" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="47" cy="32" r="2.6" fill="#ff294d"/>
+</svg>
