@@ -38,7 +38,9 @@
 	document.querySelectorAll('[data-clicko-header]').forEach(function (container) { container.innerHTML = buildHeader(); });
 	document.querySelectorAll('[data-clicko-footer]').forEach(function (container) { container.innerHTML = buildFooter(); });
 	function applyStoreSettings(row) {
-		Object.keys(row || {}).forEach(function (key) { if (Object.prototype.hasOwnProperty.call(config, key)) { config[key] = row[key] == null ? '' : row[key]; } });
+		Object.keys(row || {}).forEach(function (key) {
+			if (Object.prototype.hasOwnProperty.call(config, key) && !(key === 'contact_phone' && !row[key])) { config[key] = row[key] == null ? '' : row[key]; }
+		});
 		config.sellerUrl = config.seller_messenger_url || config.seller_profile_url || seller;
 		config.brandPageUrl = config.brand_page_url || brand;
 		seller = config.sellerUrl;
@@ -65,6 +67,7 @@
 		document.querySelectorAll('[data-clicko-footer]').forEach(function (container) { container.innerHTML = buildFooter(); });
 	}
 	function validHttps(value) { try { return new URL(value).protocol === 'https:'; } catch (error) { return false; } }
+	applyStoreSettings({});
 	if (window.supabase && config.supabaseUrl && config.publishableKey) {
 		var settingsClient = window.supabase.createClient(config.supabaseUrl, config.publishableKey);
 		settingsClient.from('clicko_storefront_settings').select('*').eq('id','storefront').maybeSingle().then(function (result) {

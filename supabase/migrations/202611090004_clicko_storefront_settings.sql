@@ -11,7 +11,7 @@ create table if not exists public.clicko_storefront_settings (
   hero_suffix text not null default 'ครบ จบ ในที่เดียว' check (char_length(hero_suffix) <= 100),
   hero_description text not null default 'เลือกชมสินค้า เช็กสภาพและรายละเอียด แล้วพูดคุยกับผู้ขายโดยตรง' check (char_length(hero_description) <= 500),
   pickup_location text not null default 'ซอยรัชดา 36' check (char_length(pickup_location) <= 180),
-  contact_phone text not null default '' check (char_length(contact_phone) <= 40),
+  contact_phone text not null default '095-975-9965' check (char_length(contact_phone) <= 40),
   seller_profile_url text not null default 'https://www.facebook.com/sippavit.gomarn/' check (char_length(seller_profile_url) <= 500),
   seller_messenger_url text not null default '' check (char_length(seller_messenger_url) <= 500),
   brand_page_url text not null default 'https://www.facebook.com/Clicko.gg/' check (char_length(brand_page_url) <= 500),

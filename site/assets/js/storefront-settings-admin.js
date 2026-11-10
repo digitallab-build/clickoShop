@@ -18,7 +18,7 @@
 		message('กำลังโหลดค่าหน้าร้าน…');
 		var result = await client.from('clicko_storefront_settings').select('*').eq('id', 'storefront').single();
 		if (result.error) { message('โหลดค่าร้านไม่สำเร็จ ตรวจว่ารัน migration 004 แล้ว: ' + result.error.message, true); return; }
-		Object.keys(result.data).forEach(function (key) { if (form.elements[key]) { form.elements[key].value = result.data[key] == null ? '' : result.data[key]; } });
+		Object.keys(result.data).forEach(function (key) { if (form.elements[key]) { form.elements[key].value = key === 'contact_phone' ? (result.data[key] || config.contact_phone || '') : (result.data[key] == null ? '' : result.data[key]); } });
 		message('แก้ไขข้อความและช่องทางติดต่อ จากนั้นกดบันทึก');
 	}
 	async function checkUser() {
