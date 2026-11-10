@@ -18,17 +18,60 @@ add_action( 'after_setup_theme', 'clicko_theme_setup' );
 
 function clicko_default_menu() {
 	echo '<ul class="clicko-nav__list">';
-	echo '<li><a href="' . esc_url( function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/products/' ) ) . '">สินค้าทั้งหมด</a></li>';
-	echo '<li><a href="' . esc_url( home_url( '/how-to-buy/' ) ) . '">วิธีซื้อสินค้า</a></li>';
+	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">หน้าแรก</a></li>';
+	echo '<li><a href="' . esc_url( home_url( '/products/' ) ) . '">สินค้าทั้งหมด</a></li>';
+	echo '<li><a href="' . esc_url( home_url( '/trade-in/' ) ) . '">รับซื้อ / เทิร์น</a></li>';
+	echo '<li><a href="' . esc_url( home_url( '/reviews/' ) ) . '">รีวิวร้าน</a></li>';
 	echo '<li><a href="' . esc_url( home_url( '/contact/' ) ) . '">ติดต่อร้าน</a></li>';
 	echo '</ul>';
 }
 
+function clicko_add_products_menu_item( $items, $args ) {
+	if ( empty( $args->theme_location ) || 'primary' !== $args->theme_location || false !== strpos( $items, 'products' ) ) {
+		return $items;
+	}
+	return $items . '<li class="menu-item menu-item-clicko-products"><a href="' . esc_url( home_url( '/products/' ) ) . '">สินค้าทั้งหมด</a></li>';
+}
+add_filter( 'wp_nav_menu_items', 'clicko_add_products_menu_item', 5, 2 );
+
+function clicko_remove_how_to_buy_menu_item( $items, $args ) {
+	foreach ( $items as $key => $item ) {
+		$path = wp_parse_url( $item->url, PHP_URL_PATH );
+		if ( is_string( $path ) && '/how-to-buy' === untrailingslashit( $path ) ) {
+			unset( $items[ $key ] );
+		}
+	}
+	return $items;
+}
+add_filter( 'wp_nav_menu_objects', 'clicko_remove_how_to_buy_menu_item', 20, 2 );
+
+function clicko_add_trade_in_menu_item( $items, $args ) {
+	if ( empty( $args->theme_location ) || 'primary' !== $args->theme_location || false !== strpos( $items, 'trade-in' ) ) {
+		return $items;
+	}
+	$items .= '<li class="menu-item menu-item-clicko-trade-in"><a href="' . esc_url( home_url( '/trade-in/' ) ) . '">รับซื้อ / เทิร์น</a></li>';
+	return $items;
+}
+add_filter( 'wp_nav_menu_items', 'clicko_add_trade_in_menu_item', 10, 2 );
+
+function clicko_add_reviews_menu_item( $items, $args ) {
+	if ( empty( $args->theme_location ) || 'primary' !== $args->theme_location || false !== strpos( $items, 'reviews' ) ) {
+		return $items;
+	}
+	return $items . '<li class="menu-item menu-item-clicko-reviews"><a href="' . esc_url( home_url( '/reviews/' ) ) . '">รีวิวร้าน</a></li>';
+}
+add_filter( 'wp_nav_menu_items', 'clicko_add_reviews_menu_item', 20, 2 );
+
 function clicko_theme_assets() {
 	$theme = wp_get_theme();
 	wp_enqueue_style( 'clicko-theme', get_stylesheet_uri(), array(), $theme->get( 'Version' ) );
-	wp_enqueue_style( 'clicko-storefront', get_template_directory_uri() . '/assets/css/storefront.css', array( 'clicko-theme' ), $theme->get( 'Version' ) );
-	$accent = sanitize_hex_color( get_theme_mod( 'clicko_accent_color', '#1676df' ) );
+	wp_enqueue_style( 'clicko-fonts', 'https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap', array(), null );
+	wp_enqueue_style( 'clicko-storefront', get_template_directory_uri() . '/assets/css/storefront.css', array( 'clicko-theme', 'clicko-fonts' ), $theme->get( 'Version' ) );
+	$accent_value = get_theme_mod( 'clicko_accent_color' );
+	if ( ! $accent_value || '#1676df' === strtolower( $accent_value ) ) {
+		$accent_value = '#D90429';
+	}
+	$accent = sanitize_hex_color( $accent_value );
 	if ( $accent ) {
 		wp_add_inline_style( 'clicko-storefront', ':root{--clicko-accent:' . $accent . ';}' );
 	}
@@ -47,7 +90,7 @@ function clicko_theme_customize( $wp_customize ) {
 		'clicko_home_description' => array( 'label' => __( 'Home page introduction', 'clicko' ), 'default' => 'รวมคอมพิวเตอร์มือสองและอุปกรณ์เกมมิง เลือกสินค้าที่สนใจแล้วสอบถามผู้ขายได้โดยตรง', 'type' => 'textarea' ),
 		'clicko_brand_tagline' => array( 'label' => __( 'Brand tagline', 'clicko' ), 'default' => 'GAMING GEAR & PC PARTS', 'type' => 'text' ),
 		'clicko_topbar_message' => array( 'label' => __( 'Top bar message', 'clicko' ), 'default' => 'PC PARTS · GAMING GEAR · BUILD YOUR SETUP', 'type' => 'text' ),
-		'clicko_accent_color' => array( 'label' => __( 'Accent color', 'clicko' ), 'default' => '#1676df', 'type' => 'color' ),
+		'clicko_accent_color' => array( 'label' => __( 'Accent color', 'clicko' ), 'default' => '#D90429', 'type' => 'color' ),
 	);
 	foreach ( $fields as $id => $field ) {
 		$wp_customize->add_setting( $id, array(
@@ -74,11 +117,18 @@ function clicko_filter_catalog_query( $query ) {
 		return;
 	}
 	$availability = sanitize_key( $query->get( 'clicko_availability' ) );
-	if ( ! in_array( $availability, array( 'instock', 'outofstock' ), true ) ) {
+	if ( '' === $availability ) { $availability = 'available'; }
+	if ( 'all' === $availability ) { return; }
+	if ( ! in_array( $availability, array( 'available', 'reserved', 'sold' ), true ) ) {
 		return;
 	}
 	$meta_query = (array) $query->get( 'meta_query' );
-	$meta_query[] = array( 'key' => '_stock_status', 'value' => $availability, 'compare' => '=' );
+	if ( 'available' === $availability || 'sold' === $availability ) {
+		$legacy_stock = 'available' === $availability ? 'instock' : 'outofstock';
+		$meta_query[] = array( 'relation' => 'OR', array( 'key' => '_clicko_stock_state', 'value' => $availability, 'compare' => '=' ), array( 'relation' => 'AND', array( 'key' => '_clicko_stock_state', 'compare' => 'NOT EXISTS' ), array( 'key' => '_stock_status', 'value' => $legacy_stock, 'compare' => '=' ) ) );
+	} else {
+		$meta_query[] = array( 'key' => '_clicko_stock_state', 'value' => $availability, 'compare' => '=' );
+	}
 	$query->set( 'meta_query', $meta_query );
 }
 add_action( 'pre_get_posts', 'clicko_filter_catalog_query' );
@@ -91,6 +141,11 @@ function clicko_product_card( $product ) {
 	$category = ( $terms && ! is_wp_error( $terms ) ) ? $terms[0]->name : '';
 	$condition = $product->get_attribute( 'condition' ) ?: $product->get_attribute( 'pa_condition' );
 	$warranty = $product->get_attribute( 'warranty' ) ?: $product->get_attribute( 'pa_warranty' );
+	$stock_state = get_post_meta( $product->get_id(), '_clicko_stock_state', true );
+	if ( ! in_array( $stock_state, array( 'available', 'reserved', 'sold' ), true ) ) {
+		$stock_state = $product->is_in_stock() ? 'available' : 'sold';
+	}
+	$stock_labels = array( 'available' => 'พร้อมขาย', 'reserved' => 'จองแล้ว', 'sold' => 'ขายแล้ว' );
 	$specs = array();
 	foreach ( $product->get_attributes() as $attribute ) {
 		if ( ! $attribute->get_visible() ) { continue; }
@@ -117,7 +172,7 @@ function clicko_product_card( $product ) {
 			<?php if ( $warranty ) : ?><p class="clicko-product-warranty"><span aria-hidden="true">✓</span> ประกัน <?php echo esc_html( $warranty ); ?></p><?php endif; ?>
 		</div>
 		<div class="clicko-product-card__purchase">
-			<span class="clicko-stock-status <?php echo $product->is_in_stock() ? 'is-in-stock' : 'is-out-of-stock'; ?>"><i></i><?php echo $product->is_in_stock() ? 'พร้อมขาย' : 'สินค้าหมด · สอบถามได้'; ?></span>
+			<span class="clicko-stock-status is-<?php echo esc_attr( $stock_state ); ?>"><i></i><?php echo esc_html( $stock_labels[ $stock_state ] ); ?></span>
 			<div class="clicko-product-card__price"><?php echo $product->get_price_html() ? wp_kses_post( $product->get_price_html() ) : '<span>สอบถามราคา</span>'; ?></div>
 			<?php echo do_shortcode( '[clicko_product_action product_id="' . absint( $product->get_id() ) . '"]' ); ?>
 			<a class="clicko-detail-button" href="<?php echo esc_url( $product->get_permalink() ); ?>">ดูรายละเอียด <span aria-hidden="true">→</span></a>
@@ -180,11 +235,12 @@ function clicko_render_catalog_toolbar() {
 	$terms = taxonomy_exists( 'product_cat' ) ? get_terms( array( 'taxonomy' => 'product_cat', 'hide_empty' => false, 'parent' => 0 ) ) : array();
 	$selected_category = sanitize_title( get_query_var( 'product_cat' ) );
 	$selected_stock = sanitize_key( get_query_var( 'clicko_availability' ) );
+	if ( '' === $selected_stock ) { $selected_stock = 'available'; }
 	$selected_order = sanitize_key( get_query_var( 'orderby' ) );
 	?>
 	<form class="clicko-product-toolbar" method="get" action="<?php echo esc_url( $shop_url ); ?>">
 		<label><span>หมวดหมู่</span><select name="product_cat"><option value="">ทั้งหมด</option><?php if ( ! is_wp_error( $terms ) ) : foreach ( $terms as $term ) : ?><option value="<?php echo esc_attr( $term->slug ); ?>" <?php selected( $selected_category, $term->slug ); ?>><?php echo esc_html( $term->name ); ?></option><?php endforeach; endif; ?></select></label>
-		<label><span>สถานะ</span><select name="clicko_availability"><option value="">ทั้งหมด</option><option value="instock" <?php selected( $selected_stock, 'instock' ); ?>>พร้อมขาย</option><option value="outofstock" <?php selected( $selected_stock, 'outofstock' ); ?>>สินค้าหมด</option></select></label>
+		<label><span>สถานะ</span><select name="clicko_availability"><option value="all" <?php selected( $selected_stock, 'all' ); ?>>ทั้งหมด</option><option value="available" <?php selected( $selected_stock, 'available' ); ?>>พร้อมขาย</option><option value="reserved" <?php selected( $selected_stock, 'reserved' ); ?>>จองแล้ว</option><option value="sold" <?php selected( $selected_stock, 'sold' ); ?>>ขายแล้ว</option></select></label>
 		<label><span>เรียงตาม</span><select name="orderby"><option value="menu_order" <?php selected( $selected_order, 'menu_order' ); ?>>แนะนำ</option><option value="date" <?php selected( $selected_order, 'date' ); ?>>มาใหม่</option><option value="price" <?php selected( $selected_order, 'price' ); ?>>ราคาต่ำไปสูง</option><option value="price-desc" <?php selected( $selected_order, 'price-desc' ); ?>>ราคาสูงไปต่ำ</option></select></label>
 		<input type="hidden" name="post_type" value="product">
 		<button class="clicko-button clicko-button--filter" type="submit">กรองสินค้า</button>

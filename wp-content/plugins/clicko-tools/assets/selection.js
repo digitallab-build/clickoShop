@@ -236,6 +236,53 @@
 			if (select.form) { select.form.requestSubmit ? select.form.requestSubmit() : select.form.submit(); }
 		});
 	});
-	updateCounts();
+	document.querySelectorAll('[data-clicko-trade-form]').forEach(function (form) {
+	var config = window.ClickoTradeInConfig || {};
+	var status = form.querySelector('[data-clicko-trade-status]');
+	var submitButton = form.querySelector('[type="submit"]');
+	var widgetId = null;
+	if (config.turnstileSiteKey && window.turnstile) {
+		widgetId = window.turnstile.render(form.querySelector('[data-clicko-turnstile]'), { sitekey: config.turnstileSiteKey, theme: 'light' });
+	} else {
+		submitButton.disabled = true;
+		status.textContent = 'ระบบรับข้อมูลยังตั้งค่าไม่ครบ กรุณาติดต่อร้าน';
+		status.classList.add('is-error');
+	}
+	form.addEventListener('submit', async function (event) {
+		event.preventDefault();
+		if (!config.submitUrl || !config.publishableKey || !config.turnstileSiteKey || !window.turnstile) {
+			status.textContent = 'ระบบรับข้อมูลยังตั้งค่าไม่ครบ กรุณาติดต่อร้าน';
+			status.classList.add('is-error');
+			return;
+		}
+		var fields = new FormData(form);
+		var model = String(fields.get('model') || '').trim();
+		var condition = String(fields.get('condition') || '').trim();
+		var files = Array.from(form.querySelector('[name="photos"]').files || []);
+		if (!model || !condition) { return; }
+		if (files.length < 1 || files.length > 4 || files.some(function (file) { return ['image/jpeg', 'image/png', 'image/webp'].indexOf(file.type) === -1 || file.size > 5 * 1024 * 1024; })) {
+			status.textContent = 'แนบอย่างน้อย 1 รูป สูงสุด 4 รูป เฉพาะ JPG, PNG หรือ WEBP ขนาดไม่เกิน 5 MB ต่อรูป';
+			status.classList.add('is-error');
+			return;
+		}
+		submitButton.disabled = true;
+		status.classList.remove('is-error');
+		status.textContent = 'กำลังส่งข้อมูลและรูปอย่างปลอดภัย...';
+		try {
+			var result = await fetch(config.submitUrl, { method: 'POST', headers: { apikey: config.publishableKey }, body: fields });
+			var payload = await result.json();
+			if (!result.ok || !payload.ok) { throw new Error(payload.error || 'ส่งข้อมูลไม่สำเร็จ'); }
+			form.reset();
+			if (widgetId !== null) { window.turnstile.reset(widgetId); }
+			status.textContent = 'บันทึกข้อมูลแล้ว หมายเลขอ้างอิง ' + payload.reference;
+		} catch (error) {
+			status.textContent = error.message || 'ส่งข้อมูลไม่สำเร็จ กรุณาลองใหม่';
+			status.classList.add('is-error');
+			if (widgetId !== null) { window.turnstile.reset(widgetId); }
+		} finally {
+			submitButton.disabled = false;
+		}
+	});
+});updateCounts();
 	refreshSelection();
 }());

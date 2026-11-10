@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="th"><head>
+	<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><base href="./">
+	<meta name="theme-color" content="#171717"><title>ตั้งค่าหน้าร้าน — Clicko</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/storefront.css"><link rel="stylesheet" href="assets/css/selection.css"><link rel="stylesheet" href="assets/css/site.css">
+</head><body><div data-clicko-header></div>
+<main id="main-content" class="clicko-page-content clicko-shell"><section class="clicko-contact-details clicko-settings-admin" data-storefront-settings-admin>
+	<p class="clicko-eyebrow">CLICKO / ADMIN SETTINGS</p><h1>ตั้งค่าหน้าร้าน</h1><p class="clicko-contact-details__intro">แก้ข้อความหน้าแรกและช่องทางติดต่อได้โดยไม่ต้องแก้ไฟล์เว็บไซต์</p><p data-settings-notice role="status" aria-live="polite"></p>
+	<form class="clicko-settings-login" data-settings-login><label>อีเมล Admin<input name="email" type="email" autocomplete="username" required></label><label>รหัสผ่าน<input name="password" type="password" autocomplete="current-password" required></label><button class="clicko-button" type="submit">เข้าสู่ระบบ</button></form>
+	<div data-settings-workspace hidden><form data-settings-form class="clicko-settings-form">
+		<fieldset><legend>แถบประกาศและโลโก้</legend><label>ข้อความแถบบน<input name="announcement" maxlength="180"></label><label>Tagline ใต้โลโก้<input name="tagline" maxlength="100"></label></fieldset>
+		<fieldset><legend>หน้าแรก</legend><label>ข้อความกำกับหัวข้อ<input name="hero_eyebrow" maxlength="120"></label><label>หัวข้อบรรทัดแรก<input name="hero_title" maxlength="100"></label><label>หัวข้อบรรทัดที่สอง<input name="hero_highlight" maxlength="100"></label><label>ข้อความสรุปหัวข้อ<input name="hero_suffix" maxlength="100"></label><label>คำอธิบายหน้าแรก<textarea name="hero_description" maxlength="500"></textarea></label></fieldset>
+		<fieldset><legend>ช่องทางติดต่อ</legend><label>Facebook ผู้ขาย<input name="seller_profile_url" type="url" maxlength="500" required></label><label>ลิงก์ Messenger ผู้ขาย (ไม่บังคับ)<input name="seller_messenger_url" type="url" maxlength="500"></label><label>Facebook Page ร้าน<input name="brand_page_url" type="url" maxlength="500" required></label><label>เบอร์โทรศัพท์ (ไม่บังคับ)<input name="contact_phone" type="tel" maxlength="40"></label><label>จุดนัดรับส่งพัสดุ<input name="pickup_location" maxlength="180"></label></fieldset>
+		<fieldset><legend>ข้อความส่งหาผู้ขาย</legend><label>ข้อความเริ่มต้น<input name="message_intro" maxlength="500"></label><label>ข้อความปิดท้าย<input name="message_footer" maxlength="500"></label></fieldset>
+		<button class="clicko-button" type="submit">บันทึกการตั้งค่า</button><button class="clicko-text-button" data-settings-logout type="button">ออกจากระบบ</button>
+	</form></div>
+</section></main><div data-clicko-footer></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script src="assets/js/site-config.js"></script><script src="assets/js/site-layout.js"></script><script src="assets/js/storefront-settings-admin.js"></script>
+</body></html>

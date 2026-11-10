@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="th"><head>
+	<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><base href="../">
+	<meta name="theme-color" content="#171717"><title>คำขอรับซื้อ / เทิร์น — Clicko</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="assets/css/storefront.css"><link rel="stylesheet" href="assets/css/selection.css"><link rel="stylesheet" href="assets/css/site.css">
+</head><body><div data-clicko-header></div>
+<main id="main-content" class="clicko-page-content"><section class="clicko-trade-in-dashboard clicko-shell" data-clicko-trade-dashboard>
+	<p class="clicko-eyebrow">CLICKO / PRIVATE REQUESTS</p><h1>รายการรับซื้อ / เทิร์น</h1>
+	<p class="clicko-trade-in-dashboard__notice" data-trade-dashboard-notice role="status" aria-live="polite"></p>
+	<div class="clicko-trade-in-dashboard__missing" data-trade-dashboard-config-missing hidden>ระบบยังไม่ได้ตั้งค่า Supabase</div>
+	<div class="clicko-trade-in-dashboard__login" data-trade-dashboard-login><form data-trade-dashboard-login-form><label>อีเมล<input name="email" type="email" autocomplete="username" required></label><label>รหัสผ่าน<input name="password" type="password" autocomplete="current-password" required></label><button class="clicko-button" type="submit">เข้าสู่ระบบเพื่อดูรายการ</button></form></div>
+	<div class="clicko-trade-in-dashboard__content" data-trade-dashboard-content hidden><div class="clicko-trade-in-dashboard__toolbar"><label>สถานะ<select data-trade-dashboard-filter><option value="all">ทุกสถานะ</option><option value="new">ใหม่</option><option value="contacted">ติดต่อแล้ว</option><option value="evaluated">ประเมินแล้ว</option><option value="closed">ปิดรายการ</option><option value="spam">สแปม</option></select></label><button class="clicko-detail-button" data-trade-dashboard-refresh type="button">โหลดใหม่</button><button class="clicko-text-button" data-trade-dashboard-logout type="button">ออกจากระบบ</button></div><div class="clicko-trade-in-dashboard__list" data-trade-dashboard-list></div></div>
+</section></main>
+<div data-clicko-footer></div><div class="clicko-toast" data-clicko-toast role="status" aria-live="polite"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script src="assets/js/site-config.js"></script><script src="assets/js/site-layout.js"></script><script src="assets/js/trade-in-dashboard.js"></script>
+</body></html>

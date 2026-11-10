@@ -1,0 +1,2 @@
+[functions.submit-trade-in]
+verify_jwt = false

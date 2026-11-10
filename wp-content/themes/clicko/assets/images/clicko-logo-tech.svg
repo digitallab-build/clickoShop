@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="160" viewBox="0 0 800 160" role="img" aria-labelledby="title">
+  <title id="title">Clicko Gaming Gear and PC Parts</title>
+  <defs>
+    <linearGradient id="key" x1="0" y1="0" x2="0.12" y2="1"><stop stop-color="#343638"/><stop offset=".44" stop-color="#151617"/><stop offset="1" stop-color="#050506"/></linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#85888b"/><stop offset=".18" stop-color="#343638"/><stop offset="1" stop-color="#08090a"/></linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff546b"/><stop offset="1" stop-color="#c90025"/></linearGradient>
+    <filter id="shadow" x="-15%" y="-15%" width="135%" height="150%"><feGaussianBlur in="SourceAlpha" stdDeviation="4"/><feOffset dy="5"/><feComponentTransfer><feFuncA type="linear" slope=".55"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <g filter="url(#shadow)" transform="skewX(-4) translate(14 3)">
+    <g font-family="Arial,Helvetica,sans-serif" font-size="76" font-style="italic" font-weight="900" text-anchor="middle" fill="#f7f7f7">
+      <g transform="translate(4)"><rect x="8" y="12" width="112" height="105" rx="13" fill="#050506" stroke="url(#red)" stroke-width="2"/><rect x="13" y="8" width="105" height="99" rx="11" fill="url(#key)" stroke="url(#edge)" stroke-width="2"/><path d="M23 14h85" stroke="#fff" stroke-opacity=".16" stroke-width="2"/><text x="66" y="83">C</text></g>
+      <g transform="translate(126)"><rect x="8" y="12" width="112" height="105" rx="13" fill="#050506" stroke="#37393b" stroke-width="2"/><rect x="13" y="8" width="105" height="99" rx="11" fill="url(#key)" stroke="url(#edge)" stroke-width="2"/><path d="M23 14h85" stroke="#fff" stroke-opacity=".16" stroke-width="2"/><text x="66" y="83">L</text></g>
+      <g transform="translate(248)"><rect x="8" y="12" width="112" height="105" rx="13" fill="#050506" stroke="#37393b" stroke-width="2"/><rect x="13" y="8" width="105" height="99" rx="11" fill="url(#key)" stroke="url(#edge)" stroke-width="2"/><path d="M23 14h85" stroke="#fff" stroke-opacity=".16" stroke-width="2"/><text x="66" y="83">I</text><circle cx="66" cy="35" r="5" fill="url(#red)"/></g>
+      <g transform="translate(370)"><rect x="8" y="12" width="112" height="105" rx="13" fill="#050506" stroke="#37393b" stroke-width="2"/><rect x="13" y="8" width="105" height="99" rx="11" fill="url(#key)" stroke="url(#edge)" stroke-width="2"/><path d="M23 14h85" stroke="#fff" stroke-opacity=".16" stroke-width="2"/><text x="66" y="83">C</text></g>
+      <g transform="translate(492)"><rect x="8" y="12" width="112" height="105" rx="13" fill="#050506" stroke="#37393b" stroke-width="2"/><rect x="13" y="8" width="105" height="99" rx="11" fill="url(#key)" stroke="url(#edge)" stroke-width="2"/><path d="M23 14h85" stroke="#fff" stroke-opacity=".16" stroke-width="2"/><text x="66" y="83">K</text></g>
+    </g>
+    <g transform="translate(614)"><rect x="8" y="12" width="112" height="105" rx="14" fill="#30000a" stroke="url(#red)" stroke-width="3"/><rect x="13" y="8" width="105" height="99" rx="12" fill="url(#key)" stroke="#55585b" stroke-width="2"/><path d="M66 23v13" stroke="#f5f5f5" stroke-width="4" stroke-linecap="round"/><rect x="55" y="28" width="22" height="51" rx="11" fill="#090a0b" stroke="#f5f5f5" stroke-width="3"/><path d="M66 29v16" stroke="url(#red)" stroke-width="5" stroke-linecap="round"/></g>
+  </g>
+  <path d="M31 139h63m610 0h63" stroke="url(#red)" stroke-width="3"/>
+</svg>

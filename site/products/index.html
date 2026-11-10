@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="th"><head>
+	<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><base href="../">
+	<meta name="theme-color" content="#171717"><title>สินค้าทั้งหมด — Clicko</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="assets/css/storefront.css"><link rel="stylesheet" href="assets/css/selection.css"><link rel="stylesheet" href="assets/css/site.css">
+</head><body><div data-clicko-header></div>
+<main id="main-content" class="clicko-page-content clicko-shell">
+	<section class="clicko-supabase-catalog clicko-supabase-catalog--grid" id="all-products" data-clicko-supabase-catalog>
+		<div class="clicko-supabase-catalog__heading"><div><p class="clicko-eyebrow">FIND YOUR GEAR</p><h1>สินค้าทั้งหมด</h1><p>เลือกดูอุปกรณ์ตามหมวดหมู่ ค้นหา และกรองสินค้าได้</p></div><div class="clicko-supabase-catalog__count" data-catalog-count></div></div>
+		<div class="clicko-supabase-catalog__categories" data-catalog-category-chips role="group" aria-label="เลือกหมวดหมู่สินค้า"></div>
+		<div class="clicko-supabase-catalog__filters">
+			<label>ค้นหา<input type="search" data-catalog-search placeholder="ชื่อสินค้า รุ่น หรือ SKU"></label>
+			<label class="clicko-supabase-catalog__category-select">หมวดหมู่<select data-catalog-category><option value="">ทุกหมวด</option></select></label>
+			<label>สภาพ<select data-catalog-condition><option value="">มือ 1 และมือ 2</option><option value="มือ1">มือ 1</option><option value="มือ2">มือ 2</option></select></label>
+			<label>สถานะ<select data-catalog-status><option value="available">พร้อมขาย</option><option value="reserved">จองแล้ว</option><option value="sold">ขายแล้ว</option><option value="all">ทุกสถานะ</option></select></label>
+			<label>เรียงตาม<select data-catalog-sort><option value="newest">มาใหม่</option><option value="price-low">ราคาต่ำไปสูง</option><option value="price-high">ราคาสูงไปต่ำ</option></select></label>
+		</div>
+		<p class="clicko-supabase-catalog__notice" data-catalog-notice role="status" aria-live="polite">กำลังโหลดสินค้า…</p>
+		<div class="clicko-product-grid" data-catalog-grid></div>
+		<aside class="clicko-supabase-selection" data-catalog-selection hidden><span data-selection-count></span><button type="button" class="clicko-button" data-selection-send>คัดลอกรายการและเปิด Facebook</button><button type="button" class="clicko-text-button" data-selection-clear>ล้างรายการ</button></aside>
+		<dialog class="clicko-supabase-product-dialog" data-catalog-dialog><button type="button" class="clicko-supabase-product-dialog__close" data-catalog-close aria-label="ปิดรายละเอียด">×</button><div data-catalog-detail></div></dialog>
+	</section>
+	<p class="clicko-price-note">ราคาและสินค้าคงเหลือควรยืนยันกับผู้ขายอีกครั้งก่อนซื้อ</p>
+</main>
+<div data-clicko-footer></div><div class="clicko-toast" data-clicko-toast role="status" aria-live="polite"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script src="assets/js/site-config.js"></script><script src="assets/js/site-layout.js"></script><script src="assets/js/supabase-catalog.js"></script>
+</body></html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="th"><head>
+	<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><base href="../">
+	<meta name="theme-color" content="#171717"><title>บัญชีลูกค้า — Clicko</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="assets/css/storefront.css"><link rel="stylesheet" href="assets/css/selection.css"><link rel="stylesheet" href="assets/css/site.css">
+</head><body><div data-clicko-header></div>
+<main id="main-content" class="clicko-page-content"><section class="clicko-customer-account clicko-shell" data-clicko-customer-account>
+	<p class="clicko-eyebrow">CLICKO ACCOUNT</p><h1>บัญชีลูกค้า</h1>
+	<p class="clicko-customer-account__notice" data-account-notice role="status" aria-live="polite"></p>
+	<div class="clicko-customer-account__missing" data-account-config-missing hidden>ระบบบัญชียังไม่ได้ตั้งค่า Supabase กรุณาติดต่อร้าน</div>
+	<div class="clicko-customer-account__auth" data-account-auth>
+		<form data-account-login><h2>เข้าสู่ระบบ</h2><label>อีเมล<input name="email" type="email" autocomplete="email" required></label><label>รหัสผ่าน<input name="password" type="password" autocomplete="current-password" required></label><button class="clicko-button" type="submit">เข้าสู่ระบบ</button><button class="clicko-text-button" data-account-reset type="button">ลืมรหัสผ่าน?</button></form>
+		<form data-account-register><h2>สมัครสมาชิก</h2><label>อีเมล<input name="email" type="email" autocomplete="email" required></label><label>รหัสผ่าน (อย่างน้อย 8 ตัว)<input name="password" type="password" autocomplete="new-password" minlength="8" required></label><button class="clicko-detail-button" type="submit">สมัครด้วยอีเมล</button></form>
+		<div class="clicko-customer-account__facebook"><span>หรือ</span><button class="clicko-detail-button" data-account-facebook type="button">เข้าสู่ระบบด้วย Facebook</button></div>
+	</div>
+	<form class="clicko-customer-account__profile" data-account-profile hidden>
+		<h2>ข้อมูลสมาชิก</h2><p>อีเมลบัญชี: <strong data-account-email></strong></p>
+		<div class="clicko-customer-account__fields"><label>ชื่อ<input name="first_name" maxlength="100" autocomplete="given-name" required></label><label>นามสกุล<input name="last_name" maxlength="100" autocomplete="family-name" required></label><label>วันเดือนปีเกิด (ไม่บังคับ)<input name="birth_date" type="date" autocomplete="bday"></label><label>เบอร์โทรศัพท์ (ไม่บังคับ)<input name="phone" type="tel" maxlength="40" autocomplete="tel"></label><label class="clicko-customer-account__wide">ที่อยู่ปัจจุบัน (ไม่บังคับ)<textarea name="current_address" maxlength="1200" autocomplete="street-address"></textarea></label><label class="clicko-customer-account__wide" data-account-contact-email-wrap>อีเมลสำหรับติดต่อ (กรณีบัญชี Facebook ไม่มีอีเมล)<input name="contact_email" type="email" maxlength="254" autocomplete="email"></label></div>
+		<button class="clicko-button" type="submit">บันทึกข้อมูลสมาชิก</button><button class="clicko-text-button" data-account-logout type="button">ออกจากระบบ</button>
+	</form>
+	<form class="clicko-customer-account__reset" data-account-new-password hidden><h2>ตั้งรหัสผ่านใหม่</h2><label>รหัสผ่านใหม่<input name="password" type="password" minlength="8" autocomplete="new-password" required></label><button class="clicko-button" type="submit">บันทึกรหัสผ่าน</button></form>
+	<p class="clicko-customer-account__privacy">สมัครสมาชิกเพื่อจัดเก็บข้อมูลที่กรอกเท่านั้น ไม่มีการขอเลขบัตรประชาชน · <a href="privacy/">นโยบายความเป็นส่วนตัว</a></p>
+</section></main>
+<div data-clicko-footer></div><div class="clicko-toast" data-clicko-toast role="status" aria-live="polite"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script src="assets/js/site-config.js"></script><script src="assets/js/site-layout.js"></script><script src="assets/js/customer-account.js"></script>
+</body></html>
