@@ -5,6 +5,7 @@
 	var seller = config.sellerUrl || 'https://www.facebook.com/sippavit.gomarn/';
 	var brand = config.brandPageUrl || 'https://www.facebook.com/Clicko.gg/';
 	var salesGroup = config.sales_group_url || 'https://www.facebook.com/groups/3325289464276829';
+	function currentLanguage() { try { return localStorage.getItem('clicko-language') === 'en' ? 'en' : 'th'; } catch (error) { return 'th'; } }
 	var routes = [
 		['หน้าแรก', ''], ['สินค้าทั้งหมด', 'products/'], ['รับซื้อ / เทิร์น', 'trade-in/'],
 		['รีวิวร้าน', 'reviews/'], ['กลุ่มซื้อขาย', salesGroup, true], ['ติดต่อเรา', 'contact/']
@@ -24,6 +25,7 @@
 		'<nav id="clicko-primary-nav" class="clicko-nav" aria-label="เมนูหลัก"><ul class="clicko-nav__list">' + nav + '</ul></nav>' +
 		'<div class="clicko-header__actions"><form class="clicko-header-search" role="search" method="get" action="' + route('products/') + '"><label class="screen-reader-text" for="clicko-site-search">ค้นหาสินค้า</label><input id="clicko-site-search" type="search" name="clicko_q" placeholder="ค้นหาสินค้า..."><button type="submit" aria-label="ค้นหา">' + icon('search') + '</button></form>' +
 		'<a class="clicko-selection-link" data-clicko-interest-link href="' + route('products/') + '" aria-label="รายการสินค้าที่สนใจ">' + icon('heart') + '<span class="clicko-selection-count" data-clicko-count>0</span></a>' +
+		'<div class="clicko-language-switch" role="group" aria-label="เลือกภาษา"><button type="button" data-clicko-language="th" aria-pressed="' + (currentLanguage() === 'th') + '">TH</button><button type="button" data-clicko-language="en" aria-pressed="' + (currentLanguage() === 'en') + '">EN</button></div>' +
 		'<details class="clicko-login-dropdown"><summary class="clicko-account-link" aria-label="เลือกประเภทการเข้าสู่ระบบ">' + icon('user') + '<span class="clicko-account-link__label">เข้าสู่ระบบ</span></summary><div class="clicko-login-dropdown__panel"><a href="' + route('account/') + '">' + icon('user') + '<span><strong>สำหรับลูกค้า</strong><small>สมัครหรือเข้าสู่ระบบสมาชิก</small></span></a><a href="' + route('admin.html') + '">' + icon('gear') + '<span><strong>สำหรับพนักงาน</strong><small>เข้าสู่ระบบจัดการร้าน</small></span></a></div></details>' +
 		'<a class="clicko-facebook-link" href="' + escape(brand) + '" target="_blank" rel="noopener noreferrer" aria-label="ติดตามเพจ Clicko">' + icon('facebook') + '</a></div></div></header>';
 	}
@@ -74,11 +76,20 @@
 	}
 	function validHttps(value) { try { return new URL(value).protocol === 'https:'; } catch (error) { return false; } }
 	applyStoreSettings({});
-	if (window.supabase && config.supabaseUrl && config.publishableKey) {
-		var settingsClient = window.supabase.createClient(config.supabaseUrl, config.publishableKey);
-		settingsClient.from('clicko_storefront_settings').select('*').eq('id','storefront').maybeSingle().then(function (result) {
-			if (!result.error && result.data) { applyStoreSettings(result.data); }
-		}).catch(function () {});
+	if (config.supabaseUrl && config.publishableKey) {
+		var settingsUrl = new URL(config.supabaseUrl.replace(/\/$/, '') + '/rest/v1/clicko_storefront_settings');
+		settingsUrl.search = new URLSearchParams({ select: '*', id: 'eq.storefront', limit: '1' }).toString();
+		var settingsController = new AbortController();
+		var settingsTimeout = window.setTimeout(function () { settingsController.abort(); }, 5000);
+		window.fetch(settingsUrl.href, {
+			headers: { apikey: config.publishableKey, Authorization: 'Bearer ' + config.publishableKey, Accept: 'application/json' },
+			signal: settingsController.signal
+		}).then(function (response) {
+			if (!response.ok) { throw new Error('Store settings request failed'); }
+			return response.json();
+		}).then(function (rows) {
+			if (Array.isArray(rows) && rows[0]) { applyStoreSettings(rows[0]); }
+		}).catch(function () {}).finally(function () { window.clearTimeout(settingsTimeout); });
 	}
 	function updateCount() {
 		var count = 0;
@@ -100,4 +111,10 @@
 	document.addEventListener('keydown', function (event) {
 		if (event.key === 'Escape') { document.querySelectorAll('.clicko-login-dropdown[open]').forEach(function (dropdown) { dropdown.removeAttribute('open'); dropdown.querySelector('summary').focus(); }); }
 	});
+	if (!document.querySelector('[data-clicko-i18n-script]')) {
+		var i18nScript = document.createElement('script');
+		i18nScript.src = route('assets/js/site-i18n.js');
+		i18nScript.dataset.clickoI18nScript = '';
+		document.body.appendChild(i18nScript);
+	}
 }());
