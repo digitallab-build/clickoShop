@@ -24,7 +24,7 @@
 		'<nav id="clicko-primary-nav" class="clicko-nav" aria-label="เมนูหลัก"><ul class="clicko-nav__list">' + nav + '</ul></nav>' +
 		'<div class="clicko-header__actions"><form class="clicko-header-search" role="search" method="get" action="' + route('products/') + '"><label class="screen-reader-text" for="clicko-site-search">ค้นหาสินค้า</label><input id="clicko-site-search" type="search" name="clicko_q" placeholder="ค้นหาสินค้า..."><button type="submit" aria-label="ค้นหา">' + icon('search') + '</button></form>' +
 		'<a class="clicko-selection-link" data-clicko-interest-link href="' + route('products/') + '" aria-label="รายการสินค้าที่สนใจ">' + icon('heart') + '<span class="clicko-selection-count" data-clicko-count>0</span></a>' +
-		'<a class="clicko-account-link" href="' + route('account/') + '" aria-label="เข้าสู่ระบบ / สมัครสมาชิก">' + icon('user') + '<span class="clicko-account-link__label">เข้าสู่ระบบ</span></a>' +
+		'<details class="clicko-login-dropdown"><summary class="clicko-account-link" aria-label="เลือกประเภทการเข้าสู่ระบบ">' + icon('user') + '<span class="clicko-account-link__label">เข้าสู่ระบบ</span><span class="clicko-login-dropdown__chevron" aria-hidden="true">⌄</span></summary><div class="clicko-login-dropdown__panel"><a href="' + route('account/') + '">' + icon('user') + '<span><strong>สำหรับลูกค้า</strong><small>สมัครหรือเข้าสู่ระบบสมาชิก</small></span></a><a href="' + route('admin.html') + '">' + icon('gear') + '<span><strong>สำหรับพนักงาน</strong><small>เข้าสู่ระบบจัดการร้าน</small></span></a></div></details>' +
 		'<a class="clicko-facebook-link" href="' + escape(brand) + '" target="_blank" rel="noopener noreferrer" aria-label="ติดตามเพจ Clicko">' + icon('facebook') + '</a></div></div></header>';
 	}
 	function buildFooter() {
@@ -93,5 +93,11 @@
 			var open = document.body.classList.toggle('clicko-menu-open');
 			toggle.setAttribute('aria-expanded', String(open));
 		}
+		if (!event.target.closest('.clicko-login-dropdown')) {
+			document.querySelectorAll('.clicko-login-dropdown[open]').forEach(function (dropdown) { dropdown.removeAttribute('open'); });
+		}
+	});
+	document.addEventListener('keydown', function (event) {
+		if (event.key === 'Escape') { document.querySelectorAll('.clicko-login-dropdown[open]').forEach(function (dropdown) { dropdown.removeAttribute('open'); dropdown.querySelector('summary').focus(); }); }
 	});
 }());

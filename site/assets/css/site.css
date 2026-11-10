@@ -34,6 +34,18 @@
 .clicko-header-search svg { fill: currentColor !important; stroke: none !important; }
 .clicko-selection-link > .clicko-icon-svg,.clicko-account-link > .clicko-icon-svg { width: 19px; height: 19px; }
 .clicko-facebook-link > .clicko-icon-svg { width: 17px; height: 17px; }
+.clicko-login-dropdown { position: relative; }
+.clicko-login-dropdown > summary { list-style: none; cursor: pointer; }
+.clicko-login-dropdown > summary::-webkit-details-marker { display: none; }
+.clicko-login-dropdown__chevron { margin-left: 1px; color: #8a001b; font-size: 15px; font-weight: 900; line-height: 1; }
+.clicko-login-dropdown__panel { position: absolute; top: calc(100% + 10px); right: 0; z-index: 100; width: 242px; display: grid; gap: 4px; padding: 7px; border: 1px solid #e6d7da; border-radius: 13px; background: #fff; box-shadow: 0 14px 34px #16030924; }
+.clicko-login-dropdown:not([open]) .clicko-login-dropdown__panel { display: none; }
+.clicko-login-dropdown__panel a { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 9px; color: #171717; }
+.clicko-login-dropdown__panel a:hover { background: #fff0f3; color: #a60020; }
+.clicko-login-dropdown__panel .clicko-icon-svg { width: 19px; height: 19px; color: #d90429; }
+.clicko-login-dropdown__panel a > span:last-child { display: grid; gap: 1px; }
+.clicko-login-dropdown__panel strong { font-size: 12px; }
+.clicko-login-dropdown__panel small { color: #727272; font-size: 10px; }
 .clicko-home-trust__icon,.clicko-home-category__icon,.clicko-home-link-card__icon,.clicko-contact-details__icon,.clicko-category-chip__icon {
 	border: 1px solid #93001c !important;
 	background: linear-gradient(145deg,#f32749,#a00020) !important;
