@@ -16,7 +16,7 @@
 ## ตั้งค่า Supabase
 
 1. ใช้ Supabase project เดิมซึ่งมีแค็ตตาล็อกและ Auth อยู่แล้ว
-2. รัน `supabase/migrations/202611090001_clicko_customer_profiles.sql`, `202611090002_clicko_staff_catalog_access.sql`, `202611090003_clicko_trade_inquiries.sql` และ `202611090004_clicko_storefront_settings.sql` ตามลำดับ
+2. รัน `supabase/migrations/202611090001_clicko_customer_profiles.sql` ถึง `202611090005_clicko_sales_group_link.sql` ตามลำดับ
 3. ตรวจ `site/supabase-config.js` ให้มี project URL และ publishable/anon key เท่านั้น ห้ามใช้ `service_role` key ใน browser หรือ commit ลง Git
 4. ใน **Authentication → URL Configuration** ตั้ง Site URL เป็น URL หน้าเว็บจริง เช่น `https://digitallab-build.github.io/clickoShop/` และเพิ่ม redirect URL `https://digitallab-build.github.io/clickoShop/**` หรืออย่างน้อย URL `/account/`
 5. หากเปิด Facebook Login ให้ตั้ง Facebook provider ใน Supabase และตั้ง OAuth redirect/callback ตาม URL ที่ Supabase แสดง
@@ -29,7 +29,7 @@
 ## สิ่งที่ผู้ดูแลแก้ได้จากหน้าเว็บ
 
 - สินค้า ราคา รูป หมวดหมู่ และสถานะ: `admin.html` (ใช้ Supabase)
-- เนื้อหาหัวเว็บ/ข้อความหน้าแรก/ช่องทาง Facebook/โทรศัพท์/จุดนัดรับและข้อความ Messenger: `site-settings.html` (Admin เท่านั้น)
+- เนื้อหาหัวเว็บ/ข้อความหน้าแรก/ช่องทาง Facebook/กลุ่มซื้อขาย/โทรศัพท์/จุดนัดรับและข้อความ Messenger: `site-settings.html` (Admin เท่านั้น)
 - คำขอรับซื้อ/เทิร์น: `trade-in-admin/` (พนักงานหรือ Admin ตาม policy)
 
 รูป banner ปัจจุบันอยู่ใน `site/assets/images/clicko-red-gaming-hero.png`; การเปลี่ยนภาพต้องเปลี่ยนไฟล์ใน repo แล้ว deploy ใหม่

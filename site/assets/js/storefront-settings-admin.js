@@ -39,10 +39,10 @@
 	});
 	form.addEventListener('submit', async function (event) {
 		event.preventDefault();
-		if (!validUrl(form.elements.seller_profile_url.value.trim(), false) || !validUrl(form.elements.seller_messenger_url.value.trim(), true) || !validUrl(form.elements.brand_page_url.value.trim(), false)) {
+		if (!validUrl(form.elements.seller_profile_url.value.trim(), false) || !validUrl(form.elements.seller_messenger_url.value.trim(), true) || !validUrl(form.elements.brand_page_url.value.trim(), false) || !validUrl(form.elements.sales_group_url.value.trim(), false)) {
 			message('ลิงก์ติดต่อร้านต้องเป็น URL HTTPS ที่ถูกต้อง', true); return;
 		}
-		var keys = ['announcement','tagline','hero_eyebrow','hero_title','hero_highlight','hero_suffix','hero_description','pickup_location','contact_phone','seller_profile_url','seller_messenger_url','brand_page_url','message_intro','message_footer'];
+		var keys = ['announcement','tagline','hero_eyebrow','hero_title','hero_highlight','hero_suffix','hero_description','pickup_location','contact_phone','seller_profile_url','seller_messenger_url','brand_page_url','sales_group_url','message_intro','message_footer'];
 		var row = { id: 'storefront', updated_at: new Date().toISOString() };
 		keys.forEach(function (key) { row[key] = form.elements[key].value.trim(); });
 		var result = await client.from('clicko_storefront_settings').update(row).eq('id','storefront').select('updated_at').maybeSingle();

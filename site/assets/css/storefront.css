@@ -195,7 +195,7 @@ button, input, select, textarea { font: inherit; }
 .clicko-contact-details__card > span:nth-child(2) { display: grid; gap: 4px; min-width: 0; }
 .clicko-contact-details__card strong { font-size: 14px; }
 .clicko-contact-details__card small { color: var(--clicko-muted); font-size: 12px; }
-.clicko-contact-details__card > span:last-child { margin-left: auto; color: var(--clicko-accent); }
+.clicko-contact-details__card > span[aria-hidden="true"]:last-child { margin-left: auto; color: var(--clicko-accent); }
 .clicko-contact-details__icon { display: grid; flex: 0 0 40px; width: 40px; height: 40px; place-items: center; border-radius: 12px; background: #eaf4ff; color: var(--clicko-accent); font-size: 20px; font-weight: 800; }
 .clicko-contact-details__note { margin: 18px 0 0; font-size: 12px; }
 .clicko-content-card { max-width: 900px; margin: auto; }

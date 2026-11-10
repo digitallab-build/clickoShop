@@ -53,6 +53,13 @@
 .clicko-contact-details__card > span[aria-hidden="true"]:last-child { display: grid; width: 26px; height: 26px; place-items: center; border-radius: 8px; background: #d90429; color: #fff; font-size: 14px; font-weight: 900; }
 .clicko-customer-account__facebook button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; }
 .clicko-customer-account__facebook button .clicko-icon-svg { width: 18px; height: 18px; }
+.clicko-contact-details__grid { grid-auto-rows: minmax(92px,1fr); align-items: stretch; }
+.clicko-contact-details__grid .clicko-contact-details__card { min-height: 92px; height: 100%; }
+.clicko-contact-details__grid .clicko-contact-details__card[hidden] { display: none !important; }
+@media (max-width: 650px) {
+	.clicko-contact-details__grid { grid-template-columns: 1fr; grid-auto-rows: minmax(86px,1fr); }
+	.clicko-contact-details__grid .clicko-contact-details__card { min-height: 86px; }
+}
 .clicko-trade-in form { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
 .clicko-trade-in form label { display: grid; gap: 6px; color: #343434; font-size: 12px; font-weight: 700; }
 .clicko-trade-in form input,.clicko-trade-in form textarea { width: 100%; min-height: 42px; padding: 10px 12px; border: 1px solid #ddd; border-radius: 9px; background: #fff; color: #171717; font: inherit; }

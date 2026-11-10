@@ -4,9 +4,10 @@
 	var base = config.baseUrl || new URL('../', window.location.href).href;
 	var seller = config.sellerUrl || 'https://www.facebook.com/sippavit.gomarn/';
 	var brand = config.brandPageUrl || 'https://www.facebook.com/Clicko.gg/';
+	var salesGroup = config.sales_group_url || 'https://www.facebook.com/groups/3325289464276829';
 	var routes = [
 		['หน้าแรก', ''], ['สินค้าทั้งหมด', 'products/'], ['รับซื้อ / เทิร์น', 'trade-in/'],
-		['รีวิวร้าน', 'reviews/'], ['ติดต่อเรา', 'contact/']
+		['รีวิวร้าน', 'reviews/'], ['กลุ่มซื้อขาย', salesGroup, true], ['ติดต่อเรา', 'contact/']
 	];
 	function route(path) { return new URL(path, base).href; }
 	function escape(value) { return String(value).replace(/[&<>"']/g, function (character) { return ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[character]; }); }
@@ -16,7 +17,7 @@
 		return '<span class="clicko-logo-mark" aria-hidden="true"><span class="clicko-logo-key">C</span><span class="clicko-logo-key">L</span><span class="clicko-logo-key">I</span><span class="clicko-logo-key">C</span><span class="clicko-logo-key">K</span><span class="clicko-logo-key clicko-logo-key--mouse"><i></i></span></span><span class="screen-reader-text">Clicko Gaming Gear &amp; PC Parts</span>';
 	}
 	function buildHeader() {
-		var nav = routes.map(function (item) { return '<li><a href="' + route(item[1]) + '">' + escape(item[0]) + '</a></li>'; }).join('');
+		var nav = routes.map(function (item) { var external = item[2]; return '<li><a href="' + escape(external ? item[1] : route(item[1])) + '"' + (external ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + escape(item[0]) + (external ? ' ↗' : '') + '</a></li>'; }).join('');
 		return '<div class="clicko-topbar"><div class="clicko-shell"><span>' + escape(config.announcement || 'GAMING GEAR · PC PARTS · BUY / SELL / TRADE') + '</span><a href="' + escape(brand) + '" target="_blank" rel="noopener noreferrer">ติดตามข่าวสารที่เพจ Clicko ↗</a></div></div>' +
 		'<header class="clicko-header"><div class="clicko-shell clicko-header__inner"><div class="clicko-brand"><a class="clicko-brand__home" href="' + route('') + '" aria-label="Clicko หน้าแรก">' + logoMark() + '</a><span class="clicko-brand__tagline">' + escape(config.tagline || 'GAMING GEAR & PC PARTS') + '</span></div>' +
 		'<button class="clicko-menu-toggle" type="button" aria-expanded="false" aria-controls="clicko-primary-nav"><span class="screen-reader-text">เปิดเมนู</span><span></span><span></span></button>' +
@@ -33,7 +34,7 @@
 		'<div class="clicko-trust-item"><span class="clicko-trust-icon">' + icon('handshake') + '</span><span><b>คุยกับผู้ขายโดยตรง</b><small>ซื้อขายผ่าน Facebook ส่วนตัว</small></span></div>' +
 		'<div class="clicko-trust-follow"><span>ติดตามข่าวสารได้ที่</span><a href="' + escape(brand) + '" target="_blank" rel="noopener noreferrer">' + icon('facebook') + ' Facebook</a></div></div></section>' +
 		'<footer class="clicko-footer"><div class="clicko-shell"><div class="clicko-footer__main"><div><a class="clicko-brand__home clicko-brand__home--footer" href="' + route('') + '" aria-label="Clicko หน้าแรก">' + logoMark() + '</a><p>เลือกของที่ใช่ แล้วคุยกับผู้ขายโดยตรง</p></div>' +
-		'<div><p class="clicko-eyebrow">ช่องทางของ Clicko</p><a href="' + escape(seller) + '" target="_blank" rel="noopener noreferrer">ติดต่อซื้อกับผู้ขาย ↗</a><a href="' + escape(brand) + '" target="_blank" rel="noopener noreferrer">ติดตามเพจ Clicko ↗</a><a href="' + route('contact/') + '">ติดต่อร้าน</a></div>' +
+		'<div><p class="clicko-eyebrow">ช่องทางของ Clicko</p><a href="' + escape(seller) + '" target="_blank" rel="noopener noreferrer">ติดต่อซื้อกับผู้ขาย ↗</a><a href="' + escape(brand) + '" target="_blank" rel="noopener noreferrer">ติดตามเพจ Clicko ↗</a><a href="' + escape(salesGroup) + '" target="_blank" rel="noopener noreferrer">เข้ากลุ่มซื้อขาย ↗</a><a href="' + route('contact/') + '">ติดต่อร้าน</a></div>' +
 		'<div><p class="clicko-eyebrow">ข้อมูลช่วยเหลือ</p><a href="' + route('trade-in/') + '">รับซื้อ / เทิร์นอุปกรณ์</a><a href="' + route('warranty-returns/') + '">ประกันและการคืนสินค้า</a><a href="' + route('privacy/') + '">นโยบายความเป็นส่วนตัว</a><a href="' + route('store-dashboard/') + '">เข้าสู่ระบบพนักงาน</a></div></div>' +
 		'<div class="clicko-footer__bottom"><span>© ' + new Date().getFullYear() + ' Clicko — Gaming Gear &amp; PC Parts</span><span>ติดต่อซื้อขายผ่าน Facebook ส่วนตัวของผู้ขาย</span></div></div></footer>';
 	}
@@ -45,8 +46,11 @@
 		});
 		config.sellerUrl = config.seller_messenger_url || config.seller_profile_url || seller;
 		config.brandPageUrl = config.brand_page_url || brand;
+		config.sales_group_url = config.sales_group_url || salesGroup;
 		seller = config.sellerUrl;
 		brand = config.brandPageUrl;
+		salesGroup = config.sales_group_url;
+		routes.forEach(function (item) { if (item[2]) { item[1] = salesGroup; } });
 		window.ClickoSupabaseCatalogConfig.contactUrl = config.sellerUrl;
 		window.ClickoSupabaseCatalogConfig.intro = config.message_intro;
 		window.ClickoSupabaseCatalogConfig.footer = config.message_footer;

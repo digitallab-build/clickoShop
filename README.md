@@ -5,7 +5,7 @@
 ## เผยแพร่บน GitHub Pages
 
 1. ไปที่ repository **Settings → Pages** แล้วเลือก **GitHub Actions** เป็น Build and deployment source
-2. รัน Supabase migrations `202611090001` ถึง `202611090004` ตามลำดับใน SQL Editor ของโปรเจกต์เดิม
+2. รัน Supabase migrations `202611090001` ถึง `202611090005` ตามลำดับใน SQL Editor ของโปรเจกต์เดิม
 3. ตรวจ `site/supabase-config.js` ว่ามี Project URL และ publishable/anon key ที่ถูกต้องเท่านั้น ห้ามใส่ `service_role` key ในไฟล์เว็บ
 4. ตั้ง Supabase Auth Site URL และ redirect allow list ตามคู่มือด้านล่าง; ตั้ง Facebook provider/callback ใน Supabase หากเปิด Facebook Login
 5. ก่อนเปิดฟอร์มรับซื้อ/เทิร์น ให้ตั้ง Cloudflare Turnstile และ Supabase Edge Function ตามคู่มือ production

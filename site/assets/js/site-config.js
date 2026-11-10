@@ -7,6 +7,7 @@
 	var sellerProfileUrl = 'https://www.facebook.com/sippavit.gomarn/';
 	var messengerUrl = '';
 	var brandPageUrl = 'https://www.facebook.com/Clicko.gg/';
+	var salesGroupUrl = 'https://www.facebook.com/groups/3325289464276829';
 	var sellerUrl = messengerUrl || sellerProfileUrl;
 	window.CLICKO_SITE = {
 		baseUrl: root,
@@ -22,6 +23,7 @@
 		seller_profile_url: sellerProfileUrl,
 		seller_messenger_url: messengerUrl,
 		brand_page_url: brandPageUrl,
+		sales_group_url: salesGroupUrl,
 		message_intro: 'สวัสดีครับ สนใจสินค้าจากเว็บไซต์ Clicko ครับ',
 		message_footer: 'รบกวนยืนยันสินค้าคงเหลือ ราคาปัจจุบัน และค่าจัดส่งด้วยครับ',
 		supabaseUrl: project.url || '',
