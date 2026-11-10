@@ -38,8 +38,12 @@ function supabaseServiceCredentials(): ServiceCredentials {
 }
 
 const fetchWithApiKeyOnly: typeof fetch = (input, init) => {
-  const headers = new Headers(init?.headers);
+  const headers = new Headers(input instanceof Request ? input.headers : undefined);
+  new Headers(init?.headers).forEach((value, name) => headers.set(name, value));
   headers.delete('Authorization');
+  if (input instanceof Request) {
+    return fetch(new Request(input, { ...init, headers }));
+  }
   return fetch(input, { ...init, headers });
 };
 
