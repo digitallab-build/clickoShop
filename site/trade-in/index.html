@@ -6,19 +6,16 @@
 	<link rel="stylesheet" href="assets/css/storefront.css"><link rel="stylesheet" href="assets/css/selection.css"><link rel="stylesheet" href="assets/css/site.css">
 </head><body><div data-clicko-header></div>
 <main id="main-content" class="clicko-page-content clicko-shell"><section class="clicko-trade-in" aria-labelledby="clicko-trade-title">
-	<div><p class="clicko-eyebrow">BUYBACK / TRADE-IN</p><h1 id="clicko-trade-title">รับซื้อ / เทิร์นอุปกรณ์</h1><p>กรอกข้อมูลติดต่อและรายละเอียดอุปกรณ์ ระบบจะบันทึกคำขอไว้ให้ทางร้านตรวจสอบ ก่อนพาไปพูดคุยกับผู้ขายผ่าน Messenger</p><p class="clicko-muted">การส่งข้อมูลยังไม่ถือเป็นการเสนอราคา ร้านจะติดต่อกลับเพื่อสอบถามรายละเอียดและประเมินราคา</p></div>
-	<form data-clicko-trade-form>
+	<div><p class="clicko-eyebrow">BUYBACK / TRADE-IN</p><h1 id="clicko-trade-title">รับซื้อ / เทิร์นอุปกรณ์</h1><p>กรอกรุ่น สภาพ และแนบรูปสินค้า ระบบจะบันทึกคำขอไว้ในระบบส่วนตัวของร้านเพื่อให้ Kew ตรวจสอบ</p><p class="clicko-muted">การส่งข้อมูลยังไม่ถือเป็นการเสนอราคา ร้านจะติดต่อกลับเพื่อสอบถามรายละเอียดและประเมินราคา</p></div>
+	<form data-clicko-trade-form enctype="multipart/form-data">
 		<label class="clicko-trade-in__honeypot" aria-hidden="true">เว็บไซต์<input name="company_website" type="text" tabindex="-1" autocomplete="off"></label>
-		<label>ชื่อ<input name="customer_first_name" maxlength="80" required autocomplete="given-name" placeholder="ชื่อจริง"></label>
-		<label>นามสกุล<input name="customer_last_name" maxlength="100" required autocomplete="family-name" placeholder="นามสกุล"></label>
-		<label>ชื่อเล่น<input name="customer_nickname" maxlength="60" required autocomplete="nickname" placeholder="ชื่อเล่นที่ให้ร้านเรียก"></label>
-		<label>เบอร์โทรศัพท์<input name="customer_phone" type="tel" maxlength="20" required autocomplete="tel" inputmode="tel" placeholder="เช่น 081-234-5678"></label>
 		<label>รุ่น / ชื่อสินค้า<input name="model" maxlength="160" required placeholder="เช่น การ์ดจอ RTX 4070"></label>
 		<label>ประกันสินค้า<input name="warranty" maxlength="100" placeholder="เช่น เหลือประกันถึง 12/2027"></label>
 		<label class="clicko-trade-in__wide">สภาพ / ตำหนิ<textarea name="condition" maxlength="500" required placeholder="บอกสภาพการใช้งาน ตำหนิ และอุปกรณ์ที่มี"></textarea></label>
+		<label class="clicko-trade-in__wide">รูปสินค้าจริง<input name="photos" type="file" accept="image/jpeg,image/png,image/webp" multiple required><small>แนบอย่างน้อย 1 รูป สูงสุด 4 รูป JPG, PNG หรือ WEBP ไม่เกิน 5 MB ต่อรูป</small></label>
 		<div class="clicko-trade-in__captcha clicko-trade-in__wide" data-clicko-turnstile></div>
-		<button class="clicko-button" type="submit">บันทึกข้อมูลและไป Messenger <span aria-hidden="true">↗</span></button>
-		<p class="clicko-trade-in__status" data-clicko-trade-status role="status" aria-live="polite">ข้อมูลติดต่อและรายละเอียดสินค้าจะถูกบันทึกในระบบของร้านเพื่อใช้ติดต่อนัดหมายและประเมินราคา</p>
+		<button class="clicko-button" type="submit">ส่งข้อมูลและรูปให้ร้าน <span aria-hidden="true">↗</span></button>
+		<p class="clicko-trade-in__status" data-clicko-trade-status role="status" aria-live="polite">ข้อมูลและรูปจะถูกจัดเก็บแบบส่วนตัวเพื่อให้ร้านตรวจสอบ</p>
 	</form>
 </section></main>
 <div data-clicko-footer></div><div class="clicko-toast" data-clicko-toast role="status" aria-live="polite"></div>

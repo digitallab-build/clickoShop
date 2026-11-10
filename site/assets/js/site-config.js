@@ -5,7 +5,7 @@
 	var root = document.querySelector('base') ? document.querySelector('base').href : window.location.origin + '/';
 	var turnstileSiteKey = '';
 	var sellerProfileUrl = 'https://www.facebook.com/sippavit.gomarn/';
-	var messengerUrl = 'https://m.me/sippavit.gomarn';
+	var messengerUrl = '';
 	var brandPageUrl = 'https://www.facebook.com/Clicko.gg/';
 	var salesGroupUrl = 'https://www.facebook.com/groups/3325289464276829';
 	var sellerUrl = messengerUrl || sellerProfileUrl;
@@ -57,7 +57,6 @@
 	window.ClickoTradeInConfig = {
 		submitUrl: window.CLICKO_SITE.tradeInUrl,
 		publishableKey: window.CLICKO_SITE.publishableKey,
-		turnstileSiteKey: turnstileSiteKey,
-		messengerUrl: messengerUrl
+		turnstileSiteKey: turnstileSiteKey
 	};
 }());
