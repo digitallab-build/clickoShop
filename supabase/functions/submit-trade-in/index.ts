@@ -24,7 +24,13 @@ type ServiceCredentials = { key: string; apiKeyOnly: boolean };
 
 function supabaseServiceCredentials(): ServiceCredentials {
   const configuredKey = Deno.env.get('CLICKO_SUPABASE_SERVICE_ROLE_KEY');
-  if (configuredKey) return { key: configuredKey, apiKeyOnly: false };
+  if (configuredKey) return { key: configuredKey, apiKeyOnly: configuredKey.startsWith('sb_secret_') };
+
+  // The Supabase JS client sends its key as both `apikey` and `Authorization`.
+  // Prefer the legacy service-role JWT while it is available so PostgREST
+  // receives the service_role claim in Authorization.
+  const legacyKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
+  if (legacyKey) return { key: legacyKey, apiKeyOnly: false };
 
   try {
     const secretKeys = JSON.parse(Deno.env.get('SUPABASE_SECRET_KEYS') || '{}');
@@ -33,8 +39,7 @@ function supabaseServiceCredentials(): ServiceCredentials {
     // Fall through to the legacy injected key if the new key map is unavailable.
   }
 
-  const legacyKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
-  return { key: legacyKey, apiKeyOnly: false };
+  return { key: '', apiKeyOnly: false };
 }
 
 const fetchWithApiKeyOnly: typeof fetch = (input, init) => {
