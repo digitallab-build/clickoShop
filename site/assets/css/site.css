@@ -37,7 +37,6 @@
 .clicko-login-dropdown { position: relative; }
 .clicko-login-dropdown > summary { list-style: none; cursor: pointer; }
 .clicko-login-dropdown > summary::-webkit-details-marker { display: none; }
-.clicko-login-dropdown__chevron { margin-left: 1px; color: #8a001b; font-size: 15px; font-weight: 900; line-height: 1; }
 .clicko-login-dropdown__panel { position: absolute; top: calc(100% + 10px); right: 0; z-index: 100; width: 242px; display: grid; gap: 4px; padding: 7px; border: 1px solid #e6d7da; border-radius: 13px; background: #fff; box-shadow: 0 14px 34px #16030924; }
 .clicko-login-dropdown:not([open]) .clicko-login-dropdown__panel { display: none; }
 .clicko-login-dropdown__panel a { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 9px; color: #171717; }
