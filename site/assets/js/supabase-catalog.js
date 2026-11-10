@@ -192,16 +192,18 @@
 		categories.forEach(function (name) { var option = node('option', '', name); option.value = name; category.appendChild(option); });
 		if (categoryChips) {
 			categoryChips.replaceChildren();
-			[{ label: 'ทั้งหมด', value: '', icon: '▦' }].concat(categories.map(function (name) {
+			[{ label: 'ทั้งหมด', value: '', icon: 'grid' }].concat(categories.map(function (name) {
 				var value = name.toLocaleLowerCase();
-				var icon = /monitor|display|จอ/.test(value) ? '▭' : /gpu|graphic|vga|การ์ดจอ/.test(value) ? '▤' : /cpu|processor|ซีพียู/.test(value) ? '▦' : /board|เมนบอร์ด/.test(value) ? '▥' : /keyboard|คีย์บอร์ด/.test(value) ? '⌨' : /mouse|เมาส์/.test(value) ? '◉' : /audio|head|หูฟัง/.test(value) ? '♫' : /gamepad|controller|จอย/.test(value) ? '◈' : /pad|แผ่นรอง/.test(value) ? '▱' : '▣';
+				var icon = /monitor|display|จอ/.test(value) ? 'monitor' : /gpu|graphic|vga|การ์ดจอ/.test(value) ? 'gpu' : /cpu|processor|ซีพียู/.test(value) ? 'cpu' : /board|เมนบอร์ด/.test(value) ? 'board' : /keyboard|คีย์บอร์ด/.test(value) ? 'keyboard' : /mouse|เมาส์/.test(value) ? 'mouse' : /audio|head|หูฟัง/.test(value) ? 'headset' : /gamepad|controller|จอย/.test(value) ? 'gamepad' : /pad|แผ่นรอง/.test(value) ? 'package' : 'package';
 				return { label: name, value: name, icon: icon };
 			})).forEach(function (item) {
 				var button = node('button', 'clicko-category-chip' + (item.value === category.value ? ' is-active' : ''));
 				button.type = 'button';
 				button.dataset.catalogCategoryChip = item.value;
 				button.setAttribute('aria-pressed', String(item.value === category.value));
-				button.appendChild(node('span', 'clicko-category-chip__icon', item.icon));
+				var categoryIcon = node('span', 'clicko-category-chip__icon');
+				categoryIcon.innerHTML = window.ClickoIcon ? window.ClickoIcon(item.icon) : item.label.slice(0, 1);
+				button.appendChild(categoryIcon);
 				button.appendChild(node('span', '', item.label));
 				categoryChips.appendChild(button);
 			});

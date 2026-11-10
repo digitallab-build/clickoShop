@@ -27,6 +27,32 @@
 .clicko-home-category__icon svg { width: 30px; height: 30px; }
 .clicko-home .clicko-hero h1 .clicko-home-hero-title { color: #fff; }
 .clicko-home-section-heading .clicko-section-subtitle { margin: 5px 0 0; }
+
+/* Solid Clicko icon language: opaque tiles, filled shapes, and red gaming accents. */
+.clicko-icon-svg { display: block; width: 21px; height: 21px; flex: 0 0 auto; fill: currentColor; }
+.clicko-header-search .clicko-icon-svg { width: 19px; height: 19px; }
+.clicko-header-search svg { fill: currentColor !important; stroke: none !important; }
+.clicko-selection-link > .clicko-icon-svg,.clicko-account-link > .clicko-icon-svg { width: 19px; height: 19px; }
+.clicko-facebook-link > .clicko-icon-svg { width: 17px; height: 17px; }
+.clicko-home-trust__icon,.clicko-home-category__icon,.clicko-home-link-card__icon,.clicko-contact-details__icon,.clicko-category-chip__icon {
+	border: 1px solid #93001c !important;
+	background: linear-gradient(145deg,#f32749,#a00020) !important;
+	color: #fff !important;
+	box-shadow: 0 5px 13px #98001f35;
+}
+.clicko-home-trust__icon svg { width: 23px; height: 23px; fill: currentColor; }
+.clicko-home-category__icon svg { width: 27px; height: 27px; fill: currentColor; }
+.clicko-home-link-card__icon svg { width: 21px; height: 21px; fill: currentColor; }
+.clicko-contact-details__icon svg { width: 21px; height: 21px; fill: currentColor; }
+.clicko-category-chip__icon { font-size: 0; }
+.clicko-category-chip__icon svg { width: 18px; height: 18px; fill: currentColor; }
+.clicko-category-chip.is-active .clicko-category-chip__icon,.clicko-category-chip[aria-pressed="true"] .clicko-category-chip__icon { border-color: #fff !important; background: #fff !important; color: #d90429 !important; }
+.clicko-trust-icon { width: 32px; height: 32px; flex: 0 0 32px; display: grid; place-items: center; border-radius: 10px; background: #d90429; color: #fff; }
+.clicko-trust-icon .clicko-icon-svg { width: 20px; height: 20px; }
+.clicko-trust-follow > a .clicko-icon-svg { width: 15px; height: 15px; fill: currentColor; }
+.clicko-contact-details__card > span[aria-hidden="true"]:last-child { display: grid; width: 26px; height: 26px; place-items: center; border-radius: 8px; background: #d90429; color: #fff; font-size: 14px; font-weight: 900; }
+.clicko-customer-account__facebook button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; }
+.clicko-customer-account__facebook button .clicko-icon-svg { width: 18px; height: 18px; }
 .clicko-trade-in form { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
 .clicko-trade-in form label { display: grid; gap: 6px; color: #343434; font-size: 12px; font-weight: 700; }
 .clicko-trade-in form input,.clicko-trade-in form textarea { width: 100%; min-height: 42px; padding: 10px 12px; border: 1px solid #ddd; border-radius: 9px; background: #fff; color: #171717; font: inherit; }
