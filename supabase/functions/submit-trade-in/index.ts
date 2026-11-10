@@ -20,19 +20,28 @@ function response(body: Record<string, unknown>, status: number, origin: string)
   return Response.json(body, { status, headers: corsHeaders(origin) });
 }
 
-function supabaseServiceKey(): string {
+type ServiceCredentials = { key: string; apiKeyOnly: boolean };
+
+function supabaseServiceCredentials(): ServiceCredentials {
   const configuredKey = Deno.env.get('CLICKO_SUPABASE_SERVICE_ROLE_KEY');
-  if (configuredKey) return configuredKey;
+  if (configuredKey) return { key: configuredKey, apiKeyOnly: false };
 
   try {
     const secretKeys = JSON.parse(Deno.env.get('SUPABASE_SECRET_KEYS') || '{}');
-    if (typeof secretKeys.default === 'string') return secretKeys.default;
+    if (typeof secretKeys.default === 'string') return { key: secretKeys.default, apiKeyOnly: true };
   } catch {
     // Fall through to the legacy injected key if the new key map is unavailable.
   }
 
-  return Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
+  const legacyKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
+  return { key: legacyKey, apiKeyOnly: false };
 }
+
+const fetchWithApiKeyOnly: typeof fetch = (input, init) => {
+  const headers = new Headers(init?.headers);
+  headers.delete('Authorization');
+  return fetch(input, { ...init, headers });
+};
 
 async function verifyTurnstile(token: string, secret: string, origin: string): Promise<boolean> {
   const body = new URLSearchParams({ secret, response: token });
@@ -60,10 +69,10 @@ Deno.serve(async (request) => {
     return response({ error: 'Expected a JSON request' }, 415, origin);
   }
 
-  const secretKey = supabaseServiceKey();
+  const serviceCredentials = supabaseServiceCredentials();
   const turnstileSecret = Deno.env.get('CLICKO_TURNSTILE_SECRET_KEY');
   const supabaseUrl = Deno.env.get('SUPABASE_URL');
-  if (!secretKey || !turnstileSecret || !supabaseUrl) {
+  if (!serviceCredentials.key || !turnstileSecret || !supabaseUrl) {
     return response({ error: 'Trade-in form is not configured yet' }, 503, origin);
   }
 
@@ -101,7 +110,10 @@ Deno.serve(async (request) => {
     return response({ error: 'Security check expired. Please verify again and resubmit' }, 400, origin);
   }
 
-  const db = createClient(supabaseUrl, secretKey, { auth: { persistSession: false, autoRefreshToken: false } });
+  const db = createClient(supabaseUrl, serviceCredentials.key, {
+    auth: { persistSession: false, autoRefreshToken: false },
+    ...(serviceCredentials.apiKeyOnly ? { global: { fetch: fetchWithApiKeyOnly } } : {}),
+  });
   const id = crypto.randomUUID();
 
   const inserted = await db.from('clicko_trade_inquiries').insert({
@@ -117,6 +129,7 @@ Deno.serve(async (request) => {
   }).select('reference').single();
 
   if (inserted.error) {
+    console.error('Trade-in insert failed', JSON.stringify({ code: inserted.error.code, message: inserted.error.message }));
     return response({ error: 'Could not save the request. Please try again' }, 500, origin);
   }
 
